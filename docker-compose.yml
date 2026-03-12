@@ -1,0 +1,14 @@
+services:
+  tg-ws-proxy:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tg-ws-proxy
+    restart: unless-stopped
+    ports:
+      - "${PORT:-1080}:1080"
+    environment:
+      PORT: "${PORT:-1080}"
+      DC_IP_1: "${DC_IP_1:-2:149.154.167.220}"
+      DC_IP_2: "${DC_IP_2:-4:149.154.167.220}"
+      VERBOSE: "${VERBOSE:-}"

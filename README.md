@@ -38,6 +38,31 @@ Telegram Desktop → SOCKS5 (127.0.0.1:1080) → TG WS Proxy → WSS (kws*.web.t
 pip install -r requirements.txt
 ```
 
+## Docker / Coolify
+
+В репозитории есть готовые `Dockerfile` и `docker-compose.yml`.
+
+### Локальный запуск через Docker Compose
+
+```bash
+cp .env.example .env
+docker compose up -d --build
+```
+
+Прокси будет доступен на `127.0.0.1:${PORT}` (по умолчанию `1080`).
+
+### Запуск в Coolify
+
+1. Создайте сервис из этого репозитория (Docker Compose).
+2. Убедитесь, что проброшен порт `1080` (или ваш `PORT`).
+3. При необходимости задайте переменные окружения:
+   - `PORT` (по умолчанию `1080`)
+   - `DC_IP_1` (по умолчанию `2:149.154.167.220`)
+   - `DC_IP_2` (по умолчанию `4:149.154.167.220`)
+   - `VERBOSE` (любое непустое значение включает DEBUG-логи)
+4. Деплойте — контейнер стартует автоматически командой:
+   `python proxy/tg_ws_proxy.py --host 0.0.0.0 ...`
+
 ### Windows (Tray-приложение)
 
 ```bash
